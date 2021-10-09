@@ -1,0 +1,27 @@
+.choice-container {
+    display: flex;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    font-size: 1.8rem;
+    border: 0.1rem solid black;
+    background-color: white;
+        
+
+}
+
+.choice-container:hover {
+    transform: translateY(-0.1rem);
+    /* transition: transform 150ms; */
+    background-color: turquoise;
+
+}
+
+.choice-prefix {
+    padding: 1.5rem 2.5rem;
+    background-color: paleturquoise;
+    color: black;
+}
+
+.choice-text {
+    padding: 1.5rem;
+}

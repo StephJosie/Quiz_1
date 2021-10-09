@@ -1,9 +1,9 @@
 :root {
-    background-color: aqua;
+    background-color: rgb(231, 245, 245);
     font-size: 62.5%;
 }
 
-*{
+* {
     box-sizing: border-box;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin: 0;
@@ -22,7 +22,7 @@ h4 {
 
 h1 {
     font-size: 5.4rem;
-    color: coral;
+    color: turquoise;
     margin: 5rem;
 }
     
@@ -64,6 +64,7 @@ h3 {
 
 .flex-center {
     justify-content: center;
+    align-items: center;
 }
 
 .justify-center {
@@ -79,20 +80,20 @@ h3 {
 }
 
 .btn {
-    font-size: 1.8rem;
+    font-size: 2rem;
     padding: 1rem 0;
     width : 20rem;
     text-align: center;
     border: 0.1rem solid black;
     margin-bottom: 1rem;
     text-decoration: none;
-    color: blueviolet;
+    color: black;
     background-color: cornsilk;
 
 }
 
 .btn:hover {
-    box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+    background-color: paleturquoise;
     transform: translateY(-0.1rem);
     transition: transform 150ms;
 }
@@ -101,5 +102,5 @@ h3 {
     cursor: not-allowed;
     box-shadow: none;
     transform: none;
-    
+
 }
