@@ -27,3 +27,63 @@
     border: 5px solid;
     border-radius: 5px;
 }
+
+.quizBox h1 {
+    background-color: gray;
+    font-size: 3rem;
+    text-align: center;
+    color: snow;
+    padding: 10px 0;
+    width: 100%;
+    margin-bottom: 2rem;
+    border-radius: 2px;
+}
+
+.quizHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quizHeader #questionNum {
+    color: black;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.quizHeader #timer {
+    font-size: 2rem;
+    font-weight: 500;
+    background-color: olive;
+    color: snow;
+    padding: 5px;
+    margin: 2.5px;
+    border-radius: 5px;
+}
+
+.quizBox #question {
+    font-size: 2rem;
+    font-weight: 500;
+    color: black;
+    border: 2px solid; 
+    border-width: 1px;
+    padding: 5px 2px;
+}
+
+.buttons {
+    margin: 2rem 0 4rem 0;
+}
+
+.btn {
+    text-align: center;
+    background-color: snow;
+    width: auto;
+    font-size: 1.5rem;
+    color: black;
+    border: 2px solid;
+    border-radius: 5px;
+    margin: 3px;
+    padding: 5px;
+
+
+}
