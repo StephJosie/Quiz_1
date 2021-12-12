@@ -1,4 +1,4 @@
-const { endsWith } = require("sequelize/dist/lib/operators");
+
 
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("#choice-text"));
@@ -6,8 +6,10 @@ const quizHeader = document.querySelector("quizHeader")
 const choice = document.querySelectorAll("btn")
 const questionCont = document.querySelector('#question')
 
+leaderBox.style.display = "none"
+
 var currentQuestion = 0;
-// var acceptingAnswers = true;
+var correctQ = true;
 var score = 0;
 var questionCounter = 0;
 var availableQuestions = [];
@@ -45,8 +47,7 @@ var startQuiz = function (event) {
     setTime()
     questionCounter = 0;
     score = 0;
-    availableQuestions = ["What does HTML stand for?", "Cascading Style Sheets (CSS) does what to the page?",
-        "Where do you place the external CSS link in HTML?"];
+    questionCont.style.display = "block"
     getNewQuestion();
 };
 
@@ -83,14 +84,42 @@ function setTime() {
             secondsLeft -= 30
         }
         currentQuestion++
-        if (currentQuestion === listQuestion.length) {
+        if (currentQuestion === questions.length) {
             clearInterval(quizTimer)
             questionCont.style.display = "none"
             end.style.display = "none"
-            leaderbox.style.display = "none"
+            leaderBox.style.display = "none"
         } else {
             getNewQuestion()
         }
+    };
+
+    var getNewQuestion = function () {
+        question.textContent = questions[currentQuestion].question
+        choice[0].textContent = questions[currentQuestion].choice0
+        choice[1].textContent = questions[currentQuestion].choice1
+        choice[2].textContent = questions[currentQuestion].choice2
+        choice[3].textContent = questions[currentQuestion].choice3
+    }
+
+    var scoreBoard = function (event) {
+        event.preventDefault()
+        var name = document.querySelector('.form-control').ariaValueMax.trim()
+
+        var playerData = {
+            playerName: name,
+            score: score,
+        }
+        localStorage.setItem("playerData", JSON.stringify(playerData))
+        var fetch = JSON.parse(localStorage.getItem("playerData"))
+        fetch.playerName
+
+        end.style.display = "none"
+        leaderBox.style.display = "block"
+
+        document.querySelectorAll(".playerBoard").innerHTML = "User: " + fetch.playerName + "" + "Points: " + fetch.score
+
+
     }
 
     // var getNewQuestion = function () {
@@ -147,4 +176,4 @@ function setTime() {
 }
 setTime();
 startQuiz();
-
+select();
