@@ -1,12 +1,12 @@
 
 
 const question = document.getElementById("question");
-const choices = Array.from(document.getElementsByClassName("#choice-text"));
+// const choices = Array.from(document.getElementsByClassName("#choice-text"));
 const quizHeader = document.querySelector("quizHeader")
-const choice = document.querySelectorAll("btn")
+const choice = document.querySelectorAll(".btn")
 const questionCont = document.querySelector('#question')
 
-leaderBox.style.display = "none"
+
 
 var currentQuestion = 0;
 var correctQ = true;
@@ -14,14 +14,16 @@ var score = 0;
 var questionCounter = 0;
 var availableQuestions = [];
 
-var questions = [
+var quizTimer;
+
+var availableQuestions = [
     {
         question: 'What does HTML stand for?',
         choice0: 'Hypertext Markup Language',
         choice1: 'Hyper Makeup Language',
         choice2: 'How To Make Language',
         choice3: 'Hypertext Make Language',
-        answer: 0,
+        answer: 'Hypertext Markup Language',
     },
     {
         question: 'Cascading Style Sheets (CSS) does what to the page?',
@@ -29,7 +31,7 @@ var questions = [
         choice1: 'Conducts data analysis',
         choice2: 'Adds style to a webpage',
         choice3: 'Where the initial code goes to create website',
-        answer: 2,
+        answer: 'Adds style to a webpage',
     },
     {
         question: 'Where do you place the external CSS link in HTML?',
@@ -37,7 +39,7 @@ var questions = [
         choice1: 'In the <h1>',
         choice2: 'In the <footer>',
         choice3: 'In the <head>',
-        answer: 3,
+        answer: 'In the <head>',
     },
 ];
 
@@ -47,8 +49,8 @@ var startQuiz = function (event) {
     setTime()
     questionCounter = 0;
     score = 0;
-    questionCont.style.display = "block"
-    getNewQuestion();
+
+    getNewQuestion()
 };
 
 let time = 10;
@@ -61,10 +63,9 @@ function setTime() {
         if (quizTime <= 0) {
             clearInterval(quizTimer);
             secondsLeft = 0
-            questionCont.style.display = "none"
-            end.style.display = "block"
 
-            // showScores();
+
+
         } else {
             quizTime--;
             let sec = Math.floor(quizTime % 60);
@@ -73,107 +74,78 @@ function setTime() {
         }
     }, 1000);
 
-    var select = function (event) {
-        var btn = event.target.textContent
-        if (btn === questions[currentQuestion].answer) {
-            alert("correct")
-            score++
+};
 
-        } else {
-            alert("Wrong")
-            secondsLeft -= 30
-        }
-        currentQuestion++
-        if (currentQuestion === questions.length) {
-            clearInterval(quizTimer)
-            questionCont.style.display = "none"
-            end.style.display = "none"
-            leaderBox.style.display = "none"
-        } else {
-            getNewQuestion()
-        }
-    };
+var select = function (event) {
+    var btn = event.target.textContent
+    if (btn === availableQuestions[currentQuestion].answer) {
+        alert("correct")
+        score++
 
-    var getNewQuestion = function () {
-        question.textContent = questions[currentQuestion].question
-        choice[0].textContent = questions[currentQuestion].choice0
-        choice[1].textContent = questions[currentQuestion].choice1
-        choice[2].textContent = questions[currentQuestion].choice2
-        choice[3].textContent = questions[currentQuestion].choice3
+    } else {
+        alert("Wrong")
+        secondsLeft -= 30
     }
+    currentQuestion++
+    if (currentQuestion === availableQuestions.length) {
+        clearInterval(quizTimer)
 
-    var scoreBoard = function (event) {
-        event.preventDefault()
-        var name = document.querySelector('.form-control').ariaValueMax.trim()
-
-        var playerData = {
-            playerName: name,
-            score: score,
-        }
-        localStorage.setItem("playerData", JSON.stringify(playerData))
-        var fetch = JSON.parse(localStorage.getItem("playerData"))
-        fetch.playerName
-
-        end.style.display = "none"
-        leaderBox.style.display = "block"
-
-        document.querySelectorAll(".playerBoard").innerHTML = "User: " + fetch.playerName + "" + "Points: " + fetch.score
-
-
+    } else {
+        getNewQuestion()
     }
+};
 
-    // var getNewQuestion = function () {
-    //     if (availableQuestions.length === 0 || questionCounter >= Max_Questions) {
-    //         return window.location.assign();
-
-    //     };
-
-    //     questionCounter++;
-    //     var questionIndex = Math.floor(Math.random() * availableQuestions.length);
-    //     currentQuestion = availableQuestions[questionIndex];
-    //     question.innerText = currentQuestion.question;
-
-    //     choices.forEach(choices, function (choices) {
-    //         var number = choices.dataset['number'];
-    //         choices.innerText = currentQuestion['choice' + number];
-    //     });
-
-
-    //     availableQuestions.splice(questionIndex, 1);
-    //     acceptingAnswers = true;
-    // };
-
-    // choices.forEach(choices, function () {
-    //     choices.addEventListener('click', function (event) {
-    //         if (!acceptingAnswers) return;
-
-    //         acceptingAnswers = false;
-    //         var selectedChoice = event.target;
-    //         selectedAnswer = selectedChoice.dataset['number'];
-    //         getNewQuestion();
-    //     });
-
-
-    // });
-
-    // let time = 10;
-    // let quizTimeInMinutes = time * 60 * 60;
-    // let quizTime = quizTimeInMinutes / 60;
-    // let counting = document.getElementById("timer");
-
-    // function startCountdown() {
-    //     let quizTimer = setInterval(function () {
-    //         if (quizTime <= 0) {
-    //             clearInterval(quizTimer);
-    //             showScores();
-    //         } else {
-    //             quizTime--;
-    //             let sec = Math.floor(quizTime % 60);
-    //             let min = Math.floor(quizTime / 60) % 60;
-    //             counting.innerHTML = `time: ${min} : ${sec}`;
-    //         }
-    //     }, 1000);
+var getNewQuestion = function () {
+    question.textContent = availableQuestions[currentQuestion].question
+    choice[0].textContent = availableQuestions[currentQuestion].choice0
+    choice[1].textContent = availableQuestions[currentQuestion].choice1
+    choice[2].textContent = availableQuestions[currentQuestion].choice2
+    choice[3].textContent = availableQuestions[currentQuestion].choice3
 }
-setTime();
-startQuiz();
-select();
+
+function Progress() {
+    let currentQuestionNum = getNewQuestion + 1;
+    let progressElement = document.getElementById("questionNum");
+    progressElement.innerHTML =
+        `Question ${currentQuestionNum} of ${availableQuestions.length}`
+
+};
+
+function showScores() {
+    let endHTML =
+        `<h1> Finished </h1>
+    <h2 id="score"> Your Score: ${score} of ${availableQuestions.length}</h2>
+    <div class= "repeat">
+        <a href= "index.html"> Take Quiz Again</a>
+    
+        </div>`;
+    let quizElement = document.getElementById("quiz");
+    quizElement.innerHTML = endHTML;
+
+}
+
+var scoreBoard = function (event) {
+    event.preventDefault()
+    var name = document.querySelector(".form-control").vale.trim()
+
+    var playerData = {
+        playerName: name,
+        score: score,
+    }
+    localStorage.setItem("playerData", JSON.stringify(playerData))
+    var fetch = JSON.parse(localStorage.getItem("playerData"))
+    fetch.playerName
+
+
+
+    document.querySelectorAll(".scoreBoard").innerHTML = "User: " + fetch.playerName + "" + "Points: " + fetch.score
+
+
+}
+
+document.getElementById("startQuiz").addEventListener("click", startQuiz);
+document.getElementById("buttons").addEventListener("click", select);
+document.getElementById("btnEnd").addEventListener("click", scoreBoard);
+// showScores();
+// Progress();
+document.getElementById("end").addEventListener("click", showScores);
