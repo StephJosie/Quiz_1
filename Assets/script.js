@@ -1,20 +1,20 @@
 
 
 const question = document.getElementById("question");
-// const choices = Array.from(document.getElementsByClassName("#choice-text"));
 const quizHeader = document.querySelector("quizHeader")
 const choice = document.querySelectorAll(".btn")
 const questionCont = document.querySelector('#question')
+const scoreBoard = document.getElementById("scoreBoard")
+const endBtn = document.getElementById("btnEnd")
 
 
 
 var currentQuestion = 0;
-var correctQ = true;
 var score = 0;
 var questionCounter = 0;
 var availableQuestions = [];
 
-var quizTimer;
+
 
 var availableQuestions = [
     {
@@ -53,7 +53,7 @@ var startQuiz = function (event) {
     getNewQuestion()
 };
 
-let time = 10;
+let time = 5;
 let quizTimeInMinutes = time * 60 * 60;
 let quizTime = quizTimeInMinutes / 60;
 let counting = document.getElementById("timer");
@@ -63,9 +63,6 @@ function setTime() {
         if (quizTime <= 0) {
             clearInterval(quizTimer);
             secondsLeft = 0
-
-
-
         } else {
             quizTime--;
             let sec = Math.floor(quizTime % 60);
@@ -76,20 +73,19 @@ function setTime() {
 
 };
 
+
 var select = function (event) {
     var btn = event.target.textContent
     if (btn === availableQuestions[currentQuestion].answer) {
         alert("correct")
         score++
-
     } else {
         alert("Wrong")
-        secondsLeft -= 30
+        time -= 15
     }
     currentQuestion++
     if (currentQuestion === availableQuestions.length) {
-        clearInterval(quizTimer)
-
+        clearInterval(quizTime)
     } else {
         getNewQuestion()
     }
@@ -103,49 +99,43 @@ var getNewQuestion = function () {
     choice[3].textContent = availableQuestions[currentQuestion].choice3
 }
 
-function Progress() {
-    let currentQuestionNum = getNewQuestion + 1;
-    let progressElement = document.getElementById("questionNum");
-    progressElement.innerHTML =
-        `Question ${currentQuestionNum} of ${availableQuestions.length}`
-
-};
-
 function showScores() {
     let endHTML =
         `<h1> Finished </h1>
     <h2 id="score"> Your Score: ${score} of ${availableQuestions.length}</h2>
     <div class= "repeat">
-        <a href= "index.html"> Take Quiz Again</a>
+        <a href= "index.html"> 
+        <button> Take Quiz Again! </button>
+        </a>
     
         </div>`;
     let quizElement = document.getElementById("quiz");
     quizElement.innerHTML = endHTML;
+    scoreBoard.classList.remove("hide")
 
 }
 
-var scoreBoard = function (event) {
-    event.preventDefault()
-    var name = document.querySelector(".form-control").vale.trim()
 
-    var playerData = {
-        playerName: name,
+var displayPlayer = function (event) {
+    event.preventDefault()
+    var playerName = document.querySelector(".endQuiz").value.trim()
+    var playerInfo = {
+        name: playerName,
         score: score,
     }
-    localStorage.setItem("playerData", JSON.stringify(playerData))
-    var fetch = JSON.parse(localStorage.getItem("playerData"))
-    fetch.playerName
+
+    localStorage.setItem("playerInfo", JSON.stringify(playerInfo))
+    var fetch = JSON.parse(localStorage.getItem("playerInfo"))
+    fetch.playerInfo
+    document.querySelector(".playerScores").innerHTML = playerName + " " + fetch.score
+    console.log(playerName)
+
+};
 
 
 
-    document.querySelectorAll(".scoreBoard").innerHTML = "User: " + fetch.playerName + "" + "Points: " + fetch.score
-
-
-}
 
 document.getElementById("startQuiz").addEventListener("click", startQuiz);
 document.getElementById("buttons").addEventListener("click", select);
-document.getElementById("btnEnd").addEventListener("click", scoreBoard);
-// showScores();
-// Progress();
 document.getElementById("end").addEventListener("click", showScores);
+document.getElementById("btnEnd").addEventListener("click", displayPlayer);

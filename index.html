@@ -19,25 +19,23 @@
                     <p id="questionNum"></p>
                     <p id="timer"></p>
                 </div>
-                <p id="question"></p>
+                <p id="question">Let's Go!</p>
                 <div id="buttons">
-                    <button class="btn">A. </button>
-                    <button class="btn">B. </button>
-                    <button class="btn">C. </button>
-                    <button class="btn">D. </button>
+                    <button class="btn" placeholder="A">A. </button>
+                    <button class="btn" placeholder="B">B. </button>
+                    <button class="btn" placeholder="C">C. </button>
+                    <button class="btn" placeholder="D">D. </button>
 
                 </div>
             </div>
             <div id="end">
                 <button class="score">Score</button>
-                <form>
-                    <input type="text" class="form-control" placeholder="Name">
-                    <input id="btnEnd" type="submit" value="submit">
-                </form>
             </div>
-            <div id="scoreBoard">
-                <div id="box">Score Board</div>
-
+            <div id="scoreBoard" class="hide">
+                <input type="text" class="endQuiz" placeholder="Name">
+                <input type="submit" value="submit" id="btnEnd">
+                <div id="Score"></div>
+                <h3 class="playerScores"></h3>
             </div>
 
         </div>
@@ -46,45 +44,3 @@
 
 
 </html>
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Play</title>
-
-    <link rel="stylesheet" href="./Assets/style.css" />
-
-</head>
-
-<body>
-    <div class="container">
-        <div id="game" class="justify-center flex-column">
-            <h2 id="question">What kind of dog do you have?</h2>
-            <div class="choice-container">
-                <p class="choice-prefix">A</p>
-                <p class="choice-text" data-number="0">Choice 0</p>
-            </div>
-            <div class="choice-container">
-                <p class="choice-prefix">B</p>
-                <p class="choice-text" data-number="1">Choice 1</p>
-            </div>
-            <div class="choice-container">
-                <p class="choice-prefix">C</p>
-                <p class="choice-text" data-number="2">Choice 2</p>
-            </div>
-            <div class="choice-container">
-                <p class="choice-prefix">D</p>
-                <p class="choice-text" data-number="3">Choice 3</p>
-            </div>
-        </div>
-
-
-    </div>
-
-    <script src="./Assets/script.js"></script>
-</body>
-
-</html> -->

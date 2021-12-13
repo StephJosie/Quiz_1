@@ -33,6 +33,7 @@
     font-size: 3rem;
     text-align: center;
     color: snow;
+
     padding: 10px 0;
     width: 100%;
     margin-bottom: 2rem;
@@ -86,4 +87,19 @@
     padding: 5px;
 
 
+}
+
+#startQuiz {
+    font-size: 2rem;
+    font-weight: 500;
+    background-color: olive;
+    color: snow;
+    padding: 5px;
+    margin: 2.5px;
+    border-radius: 5px;
+
+}
+
+.hide {
+    display: none;
 }
